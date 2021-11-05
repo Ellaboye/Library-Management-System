@@ -24,7 +24,7 @@ public class LibrarianService extends Person implements LendByPriority, LendByFi
             priorityQueue.addAll(request.getCatalogue2());
 
             Iterator<LibraryUsersService> users = priorityQueue.iterator();
-// while loop
+
             while(users.hasNext()){
                 LibraryUsersService user = priorityQueue.poll();
                 String book = Objects.requireNonNull(user).getBookRequest();
