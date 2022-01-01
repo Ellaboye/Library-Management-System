@@ -7,8 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookShelf {
+
+    //    bookShelf field used as a container for storing book titles and quantity
     private final Map<String, String> bookShelf = new HashMap<>();
 
+    //    To avoid loading 20 books manually to the bookShelf map
+    //    the loadBooksFromTextFile method was used to read books from file and load them to map
     private void loadBooksFromTextFile() throws IOException {
         try (
                 FileReader fileReader = new FileReader("src/books.txt");
@@ -25,6 +29,8 @@ public class BookShelf {
         }
     }
 
+    //    getBook method is use for querying the book container to check if a book is available and lends it
+    //    getBook method is also use for keeping counts of collected books
     public String getBook(String bookName) throws IOException {
         loadBooksFromTextFile();
 
@@ -36,7 +42,6 @@ public class BookShelf {
             }
             if(bookShelf.containsKey(bookName.toLowerCase())) {
                 if(Integer.parseInt(bookShelf.get(bookName))  == 0) {
-//                    System.out.println("All copies have been given out");
                     return "book taken";
                 }else {
                     int numOfCopies = Integer.parseInt(bookShelf.get(bookName)) - 1;

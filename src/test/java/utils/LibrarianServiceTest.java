@@ -25,6 +25,7 @@ class LibrarianServiceTest {
     @DisplayName("Lends book by priority")
     void lendBookFirstComeFirstServe() throws IOException {
         LibrarianService librarianService = new LibrarianService("peter","042");
-        assertEquals("the hobbit", librarianService.lendBookByPriority());
+        assertEquals("book not available", librarianService.lendBookByPriority());
+       // String actualResult = librarianService.lendBookFirstComeFirstServe();
     }
 }

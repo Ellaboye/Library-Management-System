@@ -9,7 +9,7 @@ import utils.RequestCatalogue;
 public class Main {
     public static void main(String[] args) throws IOException {
         RequestCatalogue req = new RequestCatalogue();
-//        System.out.println(req.requestEntrySheet());
+     //   System.out.println(req.requestEntrySheet());
 
 
         LibrarianService librarianService = new LibrarianService("jonathan","123");
@@ -18,7 +18,9 @@ public class Main {
        LibraryUsersService libraryUsersService = new LibraryUsersService("Junior student","Luke","3003",3,"the hobbit");
         libraryUsersService.getBookRequest();
         Person person = new Person("Peter", "2033");
+        System.out.println("******** Checking for Queue **********");
         librarianService.lendBookFirstComeFirstServe();
+        System.out.println("******** Checking for Priority Queue ***********");
         librarianService.lendBookByPriority();
     }
 }

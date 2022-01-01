@@ -51,7 +51,7 @@ public class RequestCatalogue {
 //            System.out.println("catalogue filled");
         }catch (Exception ex) {
             ex.printStackTrace();
-            return "error occured loading catalogues";
+            return "error occurred loading catalogues";
         }
     }
 

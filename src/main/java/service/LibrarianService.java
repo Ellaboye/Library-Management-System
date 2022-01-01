@@ -10,9 +10,16 @@ import java.io.IOException;
 import java.util.*;
 
 public class LibrarianService extends Person implements LendByPriority, LendByFirstComeFirstServe {
+        //    The Librarian class processes book request from the requestCatalogue and processes
+    //    request based on two implemented interface methods ie: LendBookByPriority and
+    //    lendBookFirstComeFirstServe
     public LibrarianService(String name, String libraryCardId) {
         super(name, libraryCardId);
     }
+
+    //    The lendBookByPriority method picks book request entry of the highest priority regardless
+    //    of insertion order this is for a case when users are asking for the same book;
+    //    The lendBookByPriority method call bookshelf to get the book request
 
     @Override
     public String lendBookByPriority() throws IOException {
@@ -24,8 +31,8 @@ public class LibrarianService extends Person implements LendByPriority, LendByFi
             priorityQueue.addAll(request.getCatalogue2());
 
             Iterator<LibraryUsersService> users = priorityQueue.iterator();
-
-            while(users.hasNext()){
+//Apply a Declarative Approach here
+             while(users.hasNext()){
                 LibraryUsersService user = priorityQueue.poll();
                 String book = Objects.requireNonNull(user).getBookRequest();
 
@@ -41,12 +48,19 @@ public class LibrarianService extends Person implements LendByPriority, LendByFi
                 }
             }
             return result;
+
+            //Declarative Approach
+           // priorityQueue.stream().filter(users -> users >)
         } catch (Exception ex) {
             System.err.println("book does not exist");
             return "book does not exist";
         }
     }
 
+
+        //    The lendBookFirstComeFirstServe method picks book request first request regardless of users priority
+        //    this is for a case where users are asking for different books
+        //    The lendBookFirstComeFirstServe method call bookshelf to get the book request
     @Override
     public String lendBookFirstComeFirstServe() throws IOException {
         String result = "";
@@ -60,7 +74,7 @@ public class LibrarianService extends Person implements LendByPriority, LendByFi
             queues.addAll(request.getCatalogue3());
 
             Iterator<LibraryUsersService> users = queues.iterator();
-
+//Apply Declarative Approach
             while(users.hasNext()){
                 LibraryUsersService user = queues.poll();
                 String book = Objects.requireNonNull(user).getBookRequest();
@@ -68,7 +82,7 @@ public class LibrarianService extends Person implements LendByPriority, LendByFi
                 BookShelf bookShelf = new BookShelf();
 
                 if(bookShelf.getBook(book).indexOf("still available") != -1){
-                    System.out.println("BOOK titled, "+book+" is borrowed by "+user.getName());
+                    System.out.println("BOOK Titled, "+book+" is borrowed by "+user.getName());
 
                     result = "book available";
                 }else{
